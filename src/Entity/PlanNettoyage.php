@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PlanNettoyageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PlanNettoyageRepository::class)]
@@ -26,6 +27,12 @@ class PlanNettoyage
      */
     #[ORM\OneToMany(targetEntity: NettoyageEffectue::class, mappedBy: 'planNettoyage')]
     private Collection $nettoyageEffectues;
+
+    #[ORM\Column]
+    private ?bool $valide = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTime $date = null;
 
     public function __construct()
     {
@@ -87,6 +94,30 @@ class PlanNettoyage
                 $nettoyageEffectue->setPlanNettoyage(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isValide(): ?bool
+    {
+        return $this->valide;
+    }
+
+    public function setValide(bool $valide): static
+    {
+        $this->valide = $valide;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTime
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTime $date): static
+    {
+        $this->date = $date;
 
         return $this;
     }

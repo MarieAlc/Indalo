@@ -1,20 +1,54 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Bienvenue{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/Alcan/indalo/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/Users/Alcan/indalo/templates/home/index.html.twig</code></li>
-    </ul>
+<div>
+    <h1>Bienvenue sur votre outils de gestion</h1>
+
+    <p>Ce site vous permet de suivre la température de vos produits, de gérer la traçabilité et bien plus encore.</p>
+    <p>Pour commencer, veuillez vous connecter.</p>
 </div>
+
+{% if app.user %} 
+<div>
+    <h1>Tableau de bord</h1>
+
+    <h2>Tâches non validées</h2>
+    {% if tachesNonValidees is empty %}
+        <p>Aucune tâche non validée.</p>
+    {% else %}
+        <ul>
+            {% for tache in tachesNonValidees %}
+                <li>{{ tache.nom }} - {{ tache.date|date('d/m/Y') }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div> 
+
+        <h2>Catégories</h2>
+        <div style="display: flex; gap: 1rem;">
+            <div style="background: #f0f0f0; padding: 1rem; border-radius: 8px;">
+                <strong>Températures</strong>
+                <p>Contôle des températures des frigo</p>
+            </div>
+            <div style="background: #f0f0f0; padding: 1rem; border-radius: 8px;">
+                <strong>Congélation</strong>
+                <p>Entrez vos date de congélation</p>
+            </div>
+            <div style="background: #f0f0f0; padding: 1rem; border-radius: 8px;">
+                <strong>Nettoyage</strong>
+                <p>Suivis entretiens de la cuisine</p>
+            </div>
+            <div style="background: #f0f0f0; padding: 1rem; border-radius: 8px;">
+                <strong>Traçabilités</strong>
+                <p>Suivre vos produits</p>
+            </div>
+           
+        </div>
+{% endif %}
+
+
 {% endblock %}
