@@ -17,8 +17,8 @@ class Congelation
     #[ORM\Column(length: 255)]
     private ?string $produit = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $date = null;
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    private ?\DateTimeImmutable $date = null;
 
     public function getId(): ?int
     {
@@ -37,15 +37,20 @@ class Congelation
         return $this;
     }
 
-    public function getDate(): ?\DateTime
+    public function getDate(): ?\DateTimeImmutable
     {
         return $this->date;
     }
 
-    public function setDate(\DateTime $date): static
+    public function setDate(\DateTimeImmutable $date): static
     {
         $this->date = $date;
 
         return $this;
     }
+        public function __construct()
+    {
+        $this->date = new \DateTimeImmutable(); 
+    }
+
 }

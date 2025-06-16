@@ -31,9 +31,6 @@ class PlanNettoyage
     #[ORM\Column]
     private ?bool $valide = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTime $date = null;
-
     public function __construct()
     {
         $this->nettoyageEffectues = new ArrayCollection();
@@ -110,15 +107,30 @@ class PlanNettoyage
         return $this;
     }
 
-    public function getDate(): ?\DateTime
+    public function isDueForValidation(?\DateTimeImmutable $lastValidationDate): bool
     {
-        return $this->date;
+        $interval = $this->getReccurence()->getIntervalleJour();
+
+        if (!$lastValidationDate) {
+            // Pas de validation jamais faite => à valider
+            return true;
+        }
+
+        $dateProchaineValidation = $lastValidationDate->modify("+{$interval} days");
+        $today = new \DateTimeImmutable();
+
+        return $today >= $dateProchaineValidation;
     }
 
-    public function setDate(\DateTime $date): static
+    public function getNextValidationDate(?\DateTimeImmutable $lastValidationDate): ?\DateTimeImmutable
     {
-        $this->date = $date;
-
-        return $this;
+        if (!$lastValidationDate) {
+            return null;
+        }
+        $interval = $this->getReccurence()->getIntervalleJour();
+        return $lastValidationDate->modify("+{$interval} days");
     }
+
+
+    
 }

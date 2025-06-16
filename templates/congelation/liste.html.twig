@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique des congélation{% endblock %}
+
+{% block body %}
+
+<h1>Historique des congélation</h1>
+<div>
+    <h2>Bienvenue sur la page de gestion des congélations</h2>
+
+    <p>Vous pouvez voir l'historique de vos données de congélations.</p>
+</div>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Date de congélation</th>
+                <th>Date de décongélation</th>
+            
+            </tr>
+        </thead>
+        <tbody>
+            {% for congelation in congelations %}
+            <tr>
+                <td>{{ congelation.produit }}</td>
+                <td>{{ congelation.date|date('Y-m-d H:i') }}</td>              
+           
+            </tr>
+            {% else %}
+            <tr>
+                <td>Aucune congélation enregistrée.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}

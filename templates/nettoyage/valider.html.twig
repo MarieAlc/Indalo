@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valider les tâches de nettoyage{% endblock %}
+
+{% block body %}
+<h1>Valider les tâches de nettoyage</h1>
+
+<form action="{{ path('app_nettoyage_valider_traiter') }}" method="POST">
+    {% if nonValides is not empty %}
+        <ul>
+            {% for item in nonValides %}
+                <li>
+                    <label>
+                        <input type="checkbox" name="plan_ids[]" value="{{ item.plan.id }}">
+                        {{ item.plan.nom }}
+                        {% if item.dateProchaineValidation %}
+                            (à valider depuis le {{ item.dateProchaineValidation|date('d/m/Y') }})
+                        {% else %}
+                            (Jamais validée)
+                        {% endif %}
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+        <button type="submit">Valider les tâches sélectionnées</button>
+    {% else %}
+        <p>Aucune tâche à valider aujourd'hui.</p>
+    {% endif %}
+</form>
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">{{ message }}</div>
+{% endfor %}
+{% for message in app.flashes('info') %}
+    <div class="alert alert-info">{{ message }}</div>
+{% endfor %}
+{% for message in app.flashes('warning') %}
+    <div class="alert alert-warning">{{ message }}</div>
+{% endfor %}
+{% for message in app.flashes('danger') %}
+    <div class="alert alert-danger">{{ message }}</div>
+{% endfor %}
+<a href="{{ path('app_nettoyage') }}">← Retour au suivi</a>
+{% endblock %}

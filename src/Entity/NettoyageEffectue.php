@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\NettoyageEffectueRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -16,21 +14,19 @@ class NettoyageEffectue
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $date = null;
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    private ?\DateTimeImmutable $date = null;
+
+    #[ORM\ManyToOne(inversedBy: 'nettoyageEffectues', targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $utilisateur = null;
 
     #[ORM\ManyToOne(inversedBy: 'nettoyageEffectues')]
     private ?PlanNettoyage $planNettoyage = null;
 
-    /**
-     * @var Collection<int, User>
-     */
-    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'nettoyageEffectue')]
-    private Collection $Utilisateur;
-
     public function __construct()
     {
-        $this->Utilisateur = new ArrayCollection();
+        $this->date = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -38,18 +34,29 @@ class NettoyageEffectue
         return $this->id;
     }
 
-    public function getDate(): ?\DateTime
+    public function getDate(): ?\DateTimeImmutable
     {
         return $this->date;
     }
 
-    public function setDate(\DateTime $date): static
+    public function setDate(\DateTimeImmutable $date): static
     {
         $this->date = $date;
 
         return $this;
     }
 
+    public function getUtilisateur(): ?User
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?User $utilisateur): static
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
 
     public function getPlanNettoyage(): ?PlanNettoyage
     {
@@ -62,35 +69,4 @@ class NettoyageEffectue
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUtilisateur(): Collection
-    {
-        return $this->Utilisateur;
-    }
-
-    public function addUtilisateur(User $utilisateur): static
-    {
-        if (!$this->Utilisateur->contains($utilisateur)) {
-            $this->Utilisateur->add($utilisateur);
-            $utilisateur->setNettoyageEffectue($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUtilisateur(User $utilisateur): static
-    {
-        if ($this->Utilisateur->removeElement($utilisateur)) {
-            // set the owning side to null (unless already changed)
-            if ($utilisateur->getNettoyageEffectue() === $this) {
-                $utilisateur->setNettoyageEffectue(null);
-            }
-        }
-
-        return $this;
-    }
-
 }

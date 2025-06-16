@@ -90,4 +90,8 @@ class Recurrence
 
         return $this;
     }
+    public function __toString(): string
+{
+    return $this->getLabel() ?? '';  // ou autre propriété descriptive
+}
 }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -20,26 +22,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     /**
-     * @var list<string> The user roles
+     * @var list<string>
      */
     #[ORM\Column]
     private array $roles = [];
 
-    /**
-     * @var string The hashed password
-     */
     #[ORM\Column]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255, nullable: true )]
-    private ?string $Qualification = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $qualification = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Utilisateur')]
-    private ?NettoyageEffectue $nettoyageEffectue = null;
+    /**
+     * @var Collection<int, NettoyageEffectue>
+     */
+    #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: NettoyageEffectue::class, cascade: ['persist', 'remove'])]
+    private Collection $nettoyageEffectues;
 
+    public function __construct()
+    {
+        $this->nettoyageEffectues = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -58,31 +64,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
 
-    /**
-     * @param list<string> $roles
-     */
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
@@ -90,9 +84,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
     public function getPassword(): ?string
     {
         return $this->password;
@@ -105,13 +96,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        // clear temporary sensitive data if any
     }
 
     public function getNom(): ?string
@@ -128,24 +115,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getQualification(): ?string
     {
-        return $this->Qualification;
+        return $this->qualification;
     }
 
-    public function setQualification(string $Qualification): static
+    public function setQualification(?string $qualification): static
     {
-        $this->Qualification = $Qualification;
+        $this->qualification = $qualification;
 
         return $this;
     }
 
-    public function getNettoyageEffectue(): ?NettoyageEffectue
+    /**
+     * @return Collection<int, NettoyageEffectue>
+     */
+    public function getNettoyageEffectues(): Collection
     {
-        return $this->nettoyageEffectue;
+        return $this->nettoyageEffectues;
     }
 
-    public function setNettoyageEffectue(?NettoyageEffectue $nettoyageEffectue): static
+    public function addNettoyageEffectue(NettoyageEffectue $nettoyageEffectue): static
     {
-        $this->nettoyageEffectue = $nettoyageEffectue;
+        if (!$this->nettoyageEffectues->contains($nettoyageEffectue)) {
+            $this->nettoyageEffectues->add($nettoyageEffectue);
+            $nettoyageEffectue->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNettoyageEffectue(NettoyageEffectue $nettoyageEffectue): static
+    {
+        if ($this->nettoyageEffectues->removeElement($nettoyageEffectue)) {
+            if ($nettoyageEffectue->getUtilisateur() === $this) {
+                $nettoyageEffectue->setUtilisateur(null);
+            }
+        }
 
         return $this;
     }

@@ -16,6 +16,22 @@ class PlanNettoyageRepository extends ServiceEntityRepository
         parent::__construct($registry, PlanNettoyage::class);
     }
 
+    public function findTachesAValider(\DateTimeImmutable $aujourdHui): array
+{
+    $qb = $this->createQueryBuilder('p')
+        ->leftJoin('p.reccurence', 'r')
+        ->leftJoin('p.nettoyageEffectues', 'n')
+        ->addSelect('r')
+        ->addSelect('n')
+        ->groupBy('p.id')
+        ->having(
+            'MAX(n.date) IS NULL OR DATE_ADD(MAX(n.date), INTERVAL r.intervalleJour DAY) <= :aujourdhui'
+        )
+        ->setParameter('aujourdhui', $aujourdHui);
+
+    return $qb->getQuery()->getResult();
+}
+
     //    /**
     //     * @return PlanNettoyage[] Returns an array of PlanNettoyage objects
     //     */

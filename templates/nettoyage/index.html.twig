@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Suivi du nettoyage{% endblock %}
+
+{% block body %}
+  <h1>🧽 Suivi du nettoyage</h1>
+
+  {# SECTION : Dernières tâches validées #}
+  <section style="margin-bottom: 2rem;">
+    <h2>✅ Dernières tâches validées</h2>
+
+    {% if validations is not empty %}
+      <ul>
+        {% for validation in validations %}
+          <li>
+            ✅ <strong>{{ validation.planNettoyage.nom }}</strong> – validée le {{ validation.date|date('d/m/Y') }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Aucune tâche récemment validée.</p>
+    {% endif %}
+  </section>
+
+  {# SECTION : Avertissement sur les tâches non validées #}
+  <section style="margin-bottom: 2rem;">
+    <h2>⚠️ Tâches non validées</h2>
+
+    {% if nonValides is not empty %}
+      <ul>
+        {% for item in nonValides %}
+          {% set plan = item.plan %}
+          {% set dateDerniereValidation = item.dateDerniereValidation %}
+          <li style="color: red;">
+            ⚠️ <strong>{{ plan.nom }}</strong> n’a pas été validée.
+            {% if dateDerniereValidation %}
+              Dernière validation le {{ dateDerniereValidation|date('d/m/Y') }}
+            {% else %}
+              Pas de validation enregistrée
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Aucune alerte de nettoyage !</p>
+    {% endif %}
+  </section>
+
+  {# SECTION : Liens vers actions #}
+  <section style="display: flex; gap: 2rem; flex-wrap: wrap;">
+    <a href="{{ path('app_nettoyage_liste') }}" class="btn-link">
+      📋 Voir l'historique complet
+    </a>
+
+    <a href="{{ path('app_nettoyage_valider') }}" class="btn-link">
+      ✔️ Valider les tâches du jour
+    </a>
+  </section>
+
+{% endblock %}

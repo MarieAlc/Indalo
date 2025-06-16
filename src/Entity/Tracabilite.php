@@ -20,8 +20,8 @@ class Tracabilite
     #[ORM\Column(length: 255)]
     private ?string $photo = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $date = null;
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    private ?\DateTimeImmutable $date = null;
 
     #[ORM\ManyToOne(inversedBy: 'tracabilites')]
     private ?DureeConsommation $duree = null;
@@ -55,12 +55,12 @@ class Tracabilite
         return $this;
     }
 
-    public function getDate(): ?\DateTime
+    public function getDate(): ?\DateTimeImmutable
     {
         return $this->date;
     }
 
-    public function setDate(\DateTime $date): static
+    public function setDate(\DateTimeImmutable $date): static
     {
         $this->date = $date;
 
@@ -77,5 +77,8 @@ class Tracabilite
         $this->duree = $duree;
 
         return $this;
+    }
+    public function __construct(){
+        $this->date = new \DateTimeImmutable(); 
     }
 }
