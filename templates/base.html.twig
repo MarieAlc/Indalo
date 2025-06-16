@@ -14,7 +14,7 @@
     <body>
         <nav class="navbar">
             <div>
-                <a href="#" class="navbar-brand">
+                <a href="{{path('app_home')}}" class="navbar-brand">
                 INDALO
                 </a>
 
@@ -32,7 +32,7 @@
                         {% else %}
                         <li><a class="nav-link" href="#">Congélation</a></li>
                         <li><a class="nav-link" href="#">Nettoyage</a></li>
-                        <li><a class="nav-link" href="#">Tempéraure</a></li>
+                        <li><a class="nav-link" href="{{path('app_temperature')}}">Tempéraure</a></li>
                         <li><a class="nav-link" href="#">Traçabilité</a></li>
                         <li><a class="nav-link" href="#">Déconnexion</a></li>
                         {% endif %}
@@ -50,7 +50,7 @@
             <div>
                 <p>Liens utiles</p>
                 <ul>
-                    <li><a href="#">Accueil</a></li>
+                    <li><a href=""{{path('app_home')}}"">Accueil</a></li>
                     {% if not app.user %}
                     <li><a href="#">Inscription</a></li>
                     <li><a href="#">Connexion</a></li>

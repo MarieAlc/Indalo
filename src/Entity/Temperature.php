@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\TemperatureRepository;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -17,11 +18,11 @@ class Temperature
     #[ORM\Column(length: 10)]
     private ?string $valeur = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $date = null;
+    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    private ?\DateTimeImmutable $date = null;
 
     #[ORM\ManyToOne(inversedBy: 'temperatures')]
-    private ?materiel $materiel = null;
+    private ?Materiel $materiel = null;
 
     public function getId(): ?int
     {
@@ -40,12 +41,12 @@ class Temperature
         return $this;
     }
 
-    public function getDate(): ?\DateTime
+    public function getDate(): ?\DateTimeImmutable
     {
         return $this->date;
     }
 
-    public function setDate(\DateTime $date): static
+    public function setDate(\DateTimeImmutable $date): static
     {
         $this->date = $date;
 
@@ -62,5 +63,9 @@ class Temperature
         $this->materiel = $materiel;
 
         return $this;
+    }
+    public function __construct()
+    {
+        $this->date = new \DateTimeImmutable(); 
     }
 }

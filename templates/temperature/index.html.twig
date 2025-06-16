@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Températures{% endblock %}
+
+{% block body %}
+<h1>Températures</h1>
+<div>
+    <p>Bienvenue dans la section de gestion des températures. Ici, vous pouvez suivre et gérer les températures de vos produits.</p>
+</div>
+<div>
+    <div>
+        <a href="{{ path('app_temperature_liste') }}">
+            <h2>Voir l'historique des températures</h2>
+        </a>
+    </div>
+
+    <div>
+        <a href="{{ path('app_temperature_ajouter') }}">
+            <h2>Ajouter une nouvelle température</h2>
+        </a>
+    </div>
+</div>
+    
+{% endblock %}

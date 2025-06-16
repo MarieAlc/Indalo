@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique des températures{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1>Historique des températures</h1>
+
+    {% if temperatures is empty %}
+        <p>Aucune température enregistrée.</p>
+    {% else %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Température (°C)</th>
+                    <th>Frigo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for temperature in temperatures %}
+                    <tr>
+                        <td>{{ temperature.date|date('d/m/Y H:i') }}</td>
+                        <td>{{ temperature.valeur }} °</td>
+                        <td>{{ temperature.materiel }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+
+
+
+{% endblock %}
