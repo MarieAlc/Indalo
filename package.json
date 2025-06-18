@@ -1,0 +1,25 @@
+{
+  "name": "indalo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/MarieAlc/Indalo.git",
+  "author": "Marie Alc <alcantara.marie@outlook.fr>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.27.4",
+    "@babel/preset-env": "^7.27.2",
+    "@symfony/webpack-encore": "^5.1.0",
+    "babel-loader": "^10.0.0",
+    "css-loader": "^7.1.2",
+    "sass": "^1.89.2",
+    "sass-loader": "^16.0.5",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.99.9",
+    "webpack-cli": "^6.0.1",
+    "webpack-notifier": "^1.15.0"
+  },
+  "scripts": {
+    "dev": "encore dev --watch",
+    "build": "encore production"
+  }
+}

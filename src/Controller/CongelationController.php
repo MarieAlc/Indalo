@@ -43,7 +43,7 @@ final class CongelationController extends AbstractController
     #[Route('/congelation/liste', name: 'app_congelation_liste')]
     public function liste(EntityManagerInterface $em): Response
     {
-        $congelations = $em->getRepository('App\Entity\Congelation')->findAll();
+         $congelations = $em->getRepository('App\Entity\Congelation')->findBy([], ['date' => 'DESC']);
 
         return $this->render('congelation/liste.html.twig', [
             'congelations' => $congelations,

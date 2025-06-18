@@ -6,30 +6,30 @@
 <div class="container mt-5">
     <h1>Historique des températures</h1>
 
-    {% if temperatures is empty %}
+    {% if groupedTemperatures is empty %}
         <p>Aucune température enregistrée.</p>
     {% else %}
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Température (°C)</th>
-                    <th>Frigo</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for temperature in temperatures %}
+        {% for date, temps in groupedTemperatures %}
+            <h3>{{ date }}</h3>
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>{{ temperature.date|date('d/m/Y H:i') }}</td>
-                        <td>{{ temperature.valeur }} °</td>
-                        <td>{{ temperature.materiel }}</td>
+                        <th>Matériel</th>
+                        <th>Température (°C)</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for temp in temps %}
+                        <tr>
+                            <td>{{ temp.materiel }}</td>
+                            <td>{{ temp.valeur }} °</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endfor %}
     {% endif %}
 
-
-
-
+    <a href="{{ path('app_temperature') }}">← Retour au suivi</a>
+</div>
 {% endblock %}

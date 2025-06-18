@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Traçabilité{% endblock %}
+
+{% block body %}
+    <h1>Vos Traçabilité</h1>
+    <div>
+        <h2>Bienvenue sur la page de gestion des traçabilités</h2>
+        <p>Vous pouvez ajouter et voir vos données de traçabilité.</p>
+    </div>
+    <div>
+        <div>
+            <a href="{{path('app_tracabilite_liste')}}">
+                <h3>Voir l'historique de vos traçabilités</h2>
+            </a>
+        </div>
+
+        <div>
+            <a href="{{path('app_tracabilite_ajouter')}}">
+                <h3>Ajouter une nouvelle traçabilité</h2>
+            </a>
+        </div>
+    </div>
+    {% endblock %}
+

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Traçabilité{% endblock %}
+
+{% block body %}
+<h1>Historique des traçabilités</h1>
+
+{% set grouped = {} %}
+{% for tracabilite in tracabilites %}
+    {% set dateKey = tracabilite.date ? tracabilite.date|date('d/m/Y') : 'Date inconnue' %}
+    {% set grouped = grouped|merge({ (dateKey): (grouped[dateKey] ?? [])|merge([tracabilite]) }) %}
+{% endfor %}
+
+{% set sortedDates = grouped|keys|sort|reverse %}
+
+{% for date in sortedDates %}
+    <h3>{{ date }}</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Produit</th>
+                <th>Durée</th>
+                <th>Photo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tracabilite in grouped[date] %}
+                <tr>
+                    <td>{{ tracabilite.id }}</td>
+                    <td>{{ tracabilite.produit }}</td>
+                    <td>{{ tracabilite.duree.duree }} Heures</td>
+                    <td>
+                        {% if tracabilite.photo %}
+                            <img src="{{ asset('uploads/photos/' ~ tracabilite.photo) }}" alt="Photo produit" style="max-width: 100px;">
+                        {% else %}
+                            Pas de photo
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Aucune traçabilité trouvée.</p>
+{% endfor %}
+
+<a href="{{ path('app_tracabilite') }}">← Retour au suivi</a>
+{% endblock %}

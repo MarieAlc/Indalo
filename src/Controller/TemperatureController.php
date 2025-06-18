@@ -44,9 +44,18 @@ final class TemperatureController extends AbstractController
     {
         $repository = $em->getRepository('App\Entity\Temperature');
         $temperatures = $repository->findAll();
+        $temperatures = $repository->findBy([], ['date' => 'DESC']);
+        $grouped = [];
+        foreach ($temperatures as $temp) {
+            $dateKey = $temp->getDate() ? $temp->getDate()->format('d/m/Y') : 'Date inconnue';
+            $grouped[$dateKey][] = $temp;
+
+        }
+        krsort($grouped);
 
         return $this->render('temperature/liste.html.twig', [
             'temperatures' => $temperatures,
+            'groupedTemperatures' => $grouped
         ]);
     }
 }

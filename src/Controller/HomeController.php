@@ -15,7 +15,6 @@ final class HomeController extends AbstractController
     public function index(PlanNettoyageRepository $planNettoyageRepository): Response
     {
         $tachesNonValidees = $planNettoyageRepository->findBy(['valide' => false]);
-        
         return $this->render('home/index.html.twig', [
             'tachesNonValidees' => $tachesNonValidees,
         ]);

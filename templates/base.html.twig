@@ -5,25 +5,25 @@
         <meta name="description" content="Suivis des temperatures, tracabilité des produits.">
         <title>{% block title %}Bienvenue{% endblock %}</title>
 
-           {% block stylesheets %}
-      {{ encore_entry_link_tags('app') }}
+    {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {{ encore_entry_link_tags('app') }}
     {% endblock %}
-
-    {% block javascripts %}{{ encore_entry_script_tags('app') }} {% endblock %}
+    
     </head>
-    <body>
+    <body>    
         <nav class="navbar">
             <div>
                 <a href="{{path('app_home')}}" class="navbar-brand">
                 INDALO
                 </a>
 
-               {#  <button class="burger" aria-label="Menu">
+                <button class="burger" aria-label="Menu">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
-                 #}
+                
 
                 <div class="nav-links">
                     <ul class="navbar-nav">
@@ -31,17 +31,21 @@
                         {% if not app.user %}    
                         <li><a class="nav-link" href="{{path('app_login')}}">Connexion</a></li>
                         {% else %}
+                        <li><a class="nav-link" href="#">Profil</a></li>
                         <li><a class="nav-link" href="{{path('app_congelation')}}">Congélation</a></li>
                         <li><a class="nav-link" href="{{path('app_nettoyage')}}">Nettoyage</a></li>
                         <li><a class="nav-link" href="{{path('app_temperature')}}">Tempéraure</a></li>
-                        <li><a class="nav-link" href="#">Traçabilité</a></li>
+                        <li><a class="nav-link" href="{{path('app_tracabilite')}}">Traçabilité</a></li>
                         <li><a class="nav-link" href="{{path('app_logout')}}">Déconnexion</a></li>
                         {% endif %}
                     </ul>
                 </div>
             </div>
         </nav>
-         {% block body %}{% endblock %}
+        {% include 'partial/flash.html.twig' %}
+        
+         {% block body %}
+         {% endblock %}
         <footer class="footer">
         <div>
             <div>
@@ -51,9 +55,12 @@
             <div>
                 <p>Liens utiles</p>
                 <ul>
-                    <li><a href=""{{path('app_home')}}"">Accueil</a></li>
+                    <li><a href="{{path('app_home')}}">Accueil</a></li>
                     {% if not app.user %}
                     <li><a href="{{path('app_login')}}">Connexion</a></li>
+                     {% else %}
+                    <li><a class="nav-link" href="#">Profil</a></li>
+                    <li><a class="nav-link" href="{{path('app_logout')}}">Déconnexion</a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -61,5 +68,7 @@
             
         </div>
         </footer>
+        {% block javascripts %}{{ encore_entry_script_tags('app') }} {% endblock %}
+            {{ encore_entry_script_tags('app') }}
     </body>
 </html>

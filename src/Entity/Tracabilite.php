@@ -17,7 +17,7 @@ class Tracabilite
     #[ORM\Column(length: 255)]
     private ?string $produit = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,  nullable: true)]
     private ?string $photo = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
