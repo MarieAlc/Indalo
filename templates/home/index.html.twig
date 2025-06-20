@@ -3,96 +3,100 @@
 {% block title %}Bienvenue{% endblock %}
 
 {% block body %}
+
 {% if not app.user %}
     <section class="section">
-
         <div class="para">
-            <h1>Bienvenue sur votre outil de gestion</h1>
-
+            <h1>👋 Bienvenue sur votre outil de gestion</h1>
             <p>Ce site vous permet de suivre la température de vos produits, de gérer la traçabilité et bien plus encore.</p>
             <p>Pour commencer, veuillez vous connecter.</p>
         </div>
 
         <div class="para">
-            <a href="{{ path('app_login') }}"><h2>Connectez-vous</h2></a>
+            <a href="{{ path('app_login') }}" class="btn-cta">🔐 Connectez-vous</a>
             <p>Si vous n'avez pas de compte, veuillez contacter l'administrateur.</p>
         </div>
     </section>
 
-
     <section class="section">
-    <h2>Fonctionnalités</h2>
-    <div class="features">
-        <div class="feature-card">
-            <h3>Suivi des températures</h3>
-            <p>Gérez les relevés de températures en cuisine ou en chambre froide.</p>
+        <h2>🛠️ Fonctionnalités</h2>
+        <div class="features">
+            <div class="feature-card">
+                <h3>🌡️ Suivi des températures</h3>
+                <p>Gérez les relevés de températures en cuisine ou en chambre froide.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📦 Traçabilité des produits</h3>
+                <p>Consultez l'historique des entrées et sorties de vos produits pour une sécurité optimale.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🧼 Suivi des nettoyages</h3>
+                <p>Consignez toutes vos actions de nettoyage pour garantir l’hygiène.</p>
+            </div>
         </div>
-        <div class="feature-card">
-            <h3>Traçabilité des produits</h3>
-            <p>Historique des entrées et sorties produits pour une sécurité optimale.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Suivi des nettoyages</h3>
-            <p>Consignez toutes vos actions de nettoyage pour garantir l’hygiène.</p>
-        </div>
-    </div>
     </section>
 {% endif %}
 
 {% if app.user %}
-<div class="para">
-    <h2>Bienvenue, {{ app.user.prenom }} !</h2>
-</div>
+    <div class="para">
+        <h2>👋 Bienvenue, {{ app.user.prenom }} !</h2>
+    </div>
 
-<section class="section"> 
-    <div>
-        <h1>Tableau de bord</h1>
+    <section class="section">
+        <h2>⚠️ Tâches non validées</h2>
 
-        <h2>Tâches non validées</h2>
-        {% if tachesNonValidees is empty %}
-            <p>Aucune tâche non validée.</p>
-        {% else %}
+        {% if nonValides is not empty %}
             <ul>
-                {% for tache in tachesNonValidees %}
-                    <li>{{ tache.nom }} - {{ tache.date|date('d/m/Y') }}</li>
+                {% for item in nonValides %}
+                    {% set plan = item.plan %}
+                    {% set dateDerniereValidation = item.dateDerniereValidation %}
+                    <li style="color: red;">
+                        ⚠️ <strong>{{ plan.nom }}</strong> n’a pas été validée.
+                        {% if dateDerniereValidation %}
+                            Dernière validation le {{ dateDerniereValidation|date('d/m/Y') }}
+                        {% else %}
+                            Pas de validation enregistrée
+                        {% endif %}
+                    </li>
                 {% endfor %}
             </ul>
+        {% else %}
+            <p>✅ Aucune alerte de nettoyage !</p>
         {% endif %}
-    </div>
-</section>
+    </section>
 
-<section class="section"> 
-    <div style="features">
-        <h2>Catégories</h2>
-        <div class="feature-card">
-            <a href="{{ path('app_temperature') }}">
-                <strong>Températures</strong>
-                <p>Contrôle des températures des frigos</p>
-            </a>
-        </div>
+    <section class="section">
+        <h2>📂 Catégories</h2>
+        <div class="features">
+            <div class="feature-card">
+                <a href="{{ path('app_temperature') }}">
+                    <strong>🌡️ Températures</strong>
+                    <p>Contrôle des températures des frigos</p>
+                </a>
+            </div>
 
-        <div class="feature-card">
-            <a href="{{ path('app_congelation') }}">
-                <strong>Congélation</strong>
-                <p>Entrez vos dates de congélation</p>
-            </a>
-        </div>
+            <div class="feature-card">
+                <a href="{{ path('app_congelation') }}">
+                    <strong>❄️ Congélation</strong>
+                    <p>Entrez vos dates de congélation</p>
+                </a>
+            </div>
 
-        <div class="feature-card">
-            <a href="{{ path('app_nettoyage') }}">
-                <strong>Nettoyage</strong>
-                <p>Suivi des entretiens de la cuisine</p>
-            </a>
-        </div>
+            <div class="feature-card">
+                <a href="{{ path('app_nettoyage') }}">
+                    <strong>🧽 Nettoyage</strong>
+                    <p>Suivi des entretiens de la cuisine</p>
+                </a>
+            </div>
 
-        <div class="feature-card">
-            <a href="{{ path('app_tracabilite') }}">
-                <strong>Traçabilités</strong>
-                <p>Suivez vos produits</p>
-            </a>
+            <div class="feature-card">
+                <a href="{{ path('app_tracabilite') }}">
+                    <strong>📦 Traçabilités</strong>
+                    <p>Suivez vos produits</p>
+                </a>
+            </div>
         </div>
-    </div>    
-</section>
+    </section>
 {% endif %}
 
 {% endblock %}

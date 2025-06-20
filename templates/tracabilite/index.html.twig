@@ -3,23 +3,20 @@
 {% block title %}Traçabilité{% endblock %}
 
 {% block body %}
-    <h1>Vos Traçabilité</h1>
-    <div>
-        <h2>Bienvenue sur la page de gestion des traçabilités</h2>
-        <p>Vous pouvez ajouter et voir vos données de traçabilité.</p>
-    </div>
-    <div>
-        <div>
-            <a href="{{path('app_tracabilite_liste')}}">
-                <h3>Voir l'historique de vos traçabilités</h2>
-            </a>
-        </div>
+<section class="section">
+  <h1 class="para">🔍 Traçabilité</h1>
+  <p class="para">Bienvenue sur la page de gestion des traçabilités. Vous pouvez consulter ou ajouter de nouvelles données de suivi.</p>
 
-        <div>
-            <a href="{{path('app_tracabilite_ajouter')}}">
-                <h3>Ajouter une nouvelle traçabilité</h2>
-            </a>
-        </div>
-    </div>
-    {% endblock %}
+  <div class="features">
+    <a href="{{ path('app_tracabilite_liste') }}" class="feature-card">
+      <h3>📜 Historique des traçabilités</h3>
+      <p>Voir toutes les entrées enregistrées</p>
+    </a>
 
+    <a href="{{ path('app_tracabilite_ajouter') }}" class="feature-card">
+      <h3>➕ Ajouter une traçabilité</h3>
+      <p>Enregistrer un nouveau lot</p>
+    </a>
+  </div>
+</section>
+{% endblock %}

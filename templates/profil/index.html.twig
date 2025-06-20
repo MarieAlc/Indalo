@@ -4,20 +4,22 @@
 
 {% block body %}
 <section class="section">
-    <h1>Mon profil</h1>
+    <h1 class="section-title">👤 Mon profil</h1>
 
-    <p><strong>Nom :</strong> {{ app.user.nom }}</p>
-     <p><strong>Prenom :</strong> {{ app.user.prenom }}</p>
-    <p><strong>Mail :</strong> {{ app.user.email }}</p>
-    <p><strong>Qualification :</strong> {{ app.user.qualification }}</p>
-
-</section>
-    
-    <hr>
-<section class="section">
-
-    <a href="{{ path('app_profil_modifier') }}">✏️ Modifier mes informations</a><br>
-    <a href="{{ path('app_profil_password') }}">🔒 Modifier mon mot de passe</a><br>
+    <div class="profil-info">
+        <p><span class="icon-label">🪪 Nom :</span> {{ app.user.nom }}</p>
+        <p><span class="icon-label">🧍‍♀️ Prénom :</span> {{ app.user.prenom }}</p>
+        <p><span class="icon-label">📧 Email :</span> {{ app.user.email }}</p>
+        <p><span class="icon-label">🎓 Qualification :</span> {{ app.user.qualification }}</p>
+    </div>
 </section>
 
-    {% endblock %}
+
+<section class="section profil-actions">
+    <h2 class="section-subtitle">⚙️ Actions</h2>
+    <div class="actions-row">
+        <a href="{{ path('app_profil_modifier') }}" class="action-link">✏️ Modifier mes informations</a>
+        <a href="{{ path('app_profil_password') }}" class="action-link">🔒 Modifier mon mot de passe</a>
+    </div>
+</section>
+{% endblock %}

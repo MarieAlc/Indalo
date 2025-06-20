@@ -166,6 +166,6 @@ final class NettoyageController extends AbstractController
         $em->flush();
 
         $this->addFlash('success', 'Les tâches ont été validées avec succès.');
-        return $this->redirectToRoute('app_nettoyage_valider');
+        return $this->redirectToRoute('app_nettoyage');
     }
 }

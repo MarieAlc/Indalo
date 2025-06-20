@@ -58,7 +58,7 @@ final class TracabiliteController extends AbstractController
 
             return $this->redirectToRoute('app_tracabilite');
         }
-        $this->addFlash('success', 'Tracabilité ajoutée avec succès !');
+        
         return $this->render('tracabilite/ajouter.html.twig', [
             'form' => $form->createView(),
         ]);

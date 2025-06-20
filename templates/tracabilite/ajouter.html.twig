@@ -9,21 +9,14 @@
 
     <p>Cette page vous permet d'ajouter une nouvelle traçabilité.</p>
 
-    <div>
+    <div class="form">
         {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
             {{ form_widget(form) }}
-            
-           
         {{ form_end(form) }}
     </div>
 
 </section>
 
-
-
 <a href="{{ path('app_tracabilite') }}">← Retour au suivi</a>
-
-
-
 
 {% endblock %}

@@ -4,11 +4,12 @@
 
 {% block body %}
 <section class="section">
-    <h1>Ajouter une nouvelle congélation</h1>
-{{form_start(form)}}
-
-{{ form_end(form) }}
-
+    <div class="form"> {# Ajout de la classe form ici #}
+        <h1>Ajouter une nouvelle congélation</h1>
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
 </section>
 
 <a href="{{ path('app_congelation') }}">← Retour au suivi</a>

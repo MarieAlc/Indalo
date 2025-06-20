@@ -1,20 +1,21 @@
-/* RESET */
+/* === RÉINITIALISATION GLOBALE === */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* BODY & TYPO */
+/* === STYLES GÉNÉRAUX DU SITE === */
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color:  #fefbf7;  
+  background-color: #fefbf7;  
   color: #222222;             
   line-height: 1.6;
 }
 
 h1, h2, h3 {
-  color: #8B2D2D;  /* rouge terre cuite */
+  color: #8B2D2D;
+  text-align: center;
 }
 
 a {
@@ -22,17 +23,18 @@ a {
   text-decoration: none;
   transition: color 0.3s ease;
 }
+
 a:hover {
-  color: #8B2D2D;  
+  color: #8B2D2D;
 }
 
 ul {
   list-style: none;
 }
 
-/* NAVBAR */
+/* === BARRE DE NAVIGATION === */
 .navbar {
-  background-color: #faf7f0;  /* blanc cassé */
+  background-color: #faf7f0;
   padding: 15px 30px;
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
   position: sticky;
@@ -49,7 +51,7 @@ ul {
 .navbar-brand {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #006633;  /* vert foncé */
+  color: #006633;
 }
 
 .burger {
@@ -73,7 +75,6 @@ ul {
 .nav-links {
   display: flex;
   align-items: center;
-  
 }
 
 .navbar-nav {
@@ -82,16 +83,15 @@ ul {
 }
 
 .nav-link {
-  color: #006633;  /* vert foncé */
+  color: #006633;
   font-weight: bold;
-
 }
 
 .nav-link:hover {
-  color: #8B2D2D;  
+  color: #8B2D2D;
 }
 
-/* BURGER MENU RESPONSIVE */
+/* === MENU BURGER RESPONSIVE === */
 @media (max-width: 768px) {
   .burger {
     display: flex;
@@ -102,7 +102,7 @@ ul {
     left: 0;
     right: 0;
     flex-direction: column;
-    background-color: #faf7f0;  /* blanc cassé */
+    background-color: #faf7f0;
     display: none;
     padding: 20px 0;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
@@ -116,13 +116,13 @@ ul {
   }
 }
 
-/* SECTIONS PRINCIPALES */
+/* === SECTIONS PRINCIPALES === */
 section, main {
   padding: 40px 20px;
 }
 
 .hero {
-  background-color: #eddcc3;  /* sable doux */
+  background-color: #eddcc3;
   padding: 60px 20px;
   text-align: center;
 }
@@ -130,17 +130,18 @@ section, main {
 .hero h1 {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: #b84c3a; /* rouge terre cuite */
+  color: #b84c3a;
 }
 
 .hero p {
   font-size: 1.2rem;
-  color: #4a4a4a;  /* gris foncé */
+  color: #4a4a4a;
 }
 
+/* === BOUTON D’APPEL À L’ACTION === */
 .btn-cta {
-  background-color: #006633;  /* vert foncé */
-  color: #faf7f0;             /* blanc cassé */
+  background-color: #006633;
+  color: #faf7f0;
   padding: 12px 24px;
   border-radius: 25px;
   font-weight: bold;
@@ -150,27 +151,44 @@ section, main {
 }
 
 .btn-cta:hover {
-  background-color: #b84c3a;  /* rouge terre cuite */
-  color: #faf7f0;
+  background-color: #b84c3a;
+}
+.btn-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #006633;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-/* SECTION CARDS / FONCTIONNALITÉS */
+.btn-link:hover {
+  color: #b84c3a;
+  text-decoration: underline;
+}
+
+
+/* === SECTIONS DE FONCTIONNALITÉS / CARTES === */
 .section {
-  background-color: #ffffff;   
+  background-color: #ffffff;
   padding: 40px 20px;
   border-radius: 15px;
   margin: 30px auto;
   max-width: 900px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
+.section p{
+  text-align: center;
+}
 
 .section h2 {
   text-align: center;
   margin-bottom: 2rem;
-  color: #8B2D2D;  
+  color: #8B2D2D;
 }
+
 .section a:hover h2 {
-  color: #006633;           
+  color: #006633;
   text-decoration: underline;
 }
 
@@ -182,8 +200,8 @@ section, main {
 }
 
 .feature-card {
-  background: #f5f1e9;        
-  border: 1px solid #006633;  
+  background: #f5f1e9;
+  border: 1px solid #006633;
   padding: 1.2rem;
   border-radius: 12px;
   width: 240px;
@@ -207,7 +225,8 @@ section, main {
   font-weight: bold;
 }
 
-/* FOOTER */
+
+/* === PIED DE PAGE === */
 .footer {
   background-color: #faf7f0;
   color: #000000;
@@ -217,16 +236,14 @@ section, main {
 
 .footer-container {
   display: flex;
-  justify-content: center; 
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
   max-width: 900px;
   margin: 0 auto;
   gap: 60px;
 }
 
-/* Colonne gauche */
 .footer-brand {
   flex: 1 1 300px;
   max-width: 400px;
@@ -241,14 +258,12 @@ section, main {
 }
 
 .footer-brand p {
-  font-weight: normal;
-  color: #222222;
   font-weight: bold;
+  color: #222222;
   line-height: 1.4;
   font-size: 1.1rem;
 }
 
-/* Colonne droite */
 .footer-links {
   flex: 1 1 300px;
   min-width: 200px;
@@ -275,14 +290,13 @@ section, main {
   color: #006633;
   font-weight: bold;
   transition: color 0.3s ease;
-  text-decoration: none;
 }
 
 .footer-links a:hover {
   color: #b84c3a;
 }
 
-/* Responsive - mobile */
+/* Pied de page en version mobile */
 @media (max-width: 600px) {
   .footer-container {
     flex-direction: column;
@@ -296,20 +310,20 @@ section, main {
   }
 }
 
-/* PARAGRAPHES GÉNÉRAUX */
+/* === PARAGRAPHES GÉNÉRAUX === */
 .para {
   text-align: center;
   font-size: 1.1rem;
   font-weight: bold;
   margin: 20px auto;
   max-width: 800px;
-  color: #222222;  
+  color: #222222;
 }
 
-/* FLASH MESSAGES */
+/* === MESSAGES FLASH === */
 .flash-success {
-  background-color: #006633;  
-  color: #faf7f0;             
+  background-color: #006633;
+  color: #faf7f0;
   padding: 12px;
   margin: 20px auto;
   border-radius: 8px;
@@ -317,17 +331,19 @@ section, main {
 }
 
 .flash-error {
-  background-color:  #8B2D2D;  
-  color: #faf7f0;             
+  background-color: #8B2D2D;
+  color: #faf7f0;
   padding: 12px;
   margin: 20px auto;
   border-radius: 8px;
   text-align: center;
 }
+
+/* === FORMULAIRES === */
 .form {
   max-width: 400px;
   margin: 40px auto;
-  background-color: #faf7f0; /* beige clair */
+  background-color: #faf7f0;
   padding: 30px 25px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -335,7 +351,7 @@ section, main {
 }
 
 .form h1 {
-  color: #8B2D2D; /* rouge terre cuite */
+  color: #8B2D2D;
   margin-bottom: 25px;
   text-align: center;
 }
@@ -344,39 +360,59 @@ section, main {
   display: block;
   margin-bottom: 6px;
   font-weight: 600;
-  color: #006633; /* vert foncé */
+  color: #006633;
 }
 
-.form input[type="email"],
-.form input[type="password"] {
+.form input {
   width: 100%;
-  padding: 10px 12px;
+  padding: 8px 12px;
   margin-bottom: 20px;
-  border: 2px solid #006633;
+  border: 2px solid #d3cfc4;
   border-radius: 8px;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  font-family: 'Segoe UI', sans-serif;
+  color: #222;
+  background-color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
 }
 
-.form input[type="email"]:focus,
-.form input[type="password"]:focus {
-  border-color: #b84c3a; /* rouge terre cuite */
+.form input:hover,
+.form input:focus {
+  border-color: #6b665b;
+  box-shadow: 0 0 8px rgba(107, 102, 91, 0.4);
   outline: none;
+  background-color: #f7f6f2;
 }
 
-.form input[type="checkbox"] {
-  margin-right: 8px;
-  transform: scale(1.1);
-  vertical-align: middle;
+.form select {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: 2px solid #888;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  color: #222;
+  background-color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23666" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px 16px;
 }
 
-.form label input[type="checkbox"] {
-  vertical-align: middle;
+.form select:focus {
+  border-color: #555;
+  outline: none;
+  box-shadow: 0 0 8px rgba(85,85,85,0.6);
 }
 
 .form button[type="submit"] {
-  background-color: #006633; /* vert foncé */
-  color: #faf7f0; /* blanc cassé */
+  background-color: #006633;
+  color: #faf7f0;
   border: none;
   border-radius: 25px;
   padding: 12px 25px;
@@ -389,8 +425,97 @@ section, main {
 }
 
 .form button[type="submit"]:hover {
-  background-color: #b84c3a; /* rouge terre cuite */
+  background-color: #b84c3a;
 }
+/* === FORMULAIRE DE VALIDATION DE NETTOYAGE === */
+.nettoyage-validation-form {
+  max-width: 700px;
+  margin: 40px auto;
+  background-color: #fffdf9;
+  padding: 30px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.nettoyage-list {
+  padding-left: 0;
+  margin-bottom: 2rem;
+}
+
+.nettoyage-item {
+  margin-bottom: 1.5rem;
+}
+
+.nettoyage-label {
+  display: block;
+  font-weight: 600;
+  color: #006633;
+  cursor: pointer;
+}
+
+.nettoyage-label-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background-color: #f5f1e9;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #d3cfc4;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.nettoyage-label-top input[type="checkbox"] {
+  all: unset;
+  appearance: auto;
+  width: 20px;
+  height: 20px;
+  accent-color: #006633;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.nettoyage-task-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #222;
+  white-space: nowrap;
+  flex-grow: 1;
+}
+
+.nettoyage-checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: #006633;
+  flex-shrink: 0;
+}
+
+.nettoyage-hint {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 4px;
+}
+
+.nettoyage-submit {
+  background-color: #006633;
+  color: #faf7f0;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.nettoyage-submit:hover {
+  background-color: #b84c3a;
+}
+/* === ALERTES ET MESSAGES === */
 
 .alert {
   background-color: #8B2D2D;
@@ -419,3 +544,72 @@ section, main {
   text-decoration: underline;
 }
 
+/* Section profil */
+.profil-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* centre la colonne */
+    text-align: left;      /* IMPORTANT : on veut que le texte soit aligné à gauche */
+    max-width: 400px;      /* optionnel, limite la largeur */
+    margin: 0 auto;        /* centre le bloc horizontalement */
+}
+
+.profil-info p {
+    display: flex;         /* aligne label et valeur sur la même ligne */
+    width: 100%;           /* prend toute la largeur disponible */
+    justify-content: flex-start; /* commence à gauche */
+    gap: 0.5rem;           /* espace entre label et valeur */
+    margin-bottom: 0.8rem;
+}
+.profil-section {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.icon-label {
+    font-weight: bold;
+    margin-right: 0.5rem;
+    display: inline-block;
+    width: 180px;
+}
+
+/* Section Actions */
+.profil-actions {
+    padding: 1rem 2rem;
+}
+
+.section-title,
+.section-subtitle {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+/* Conteneur pour mettre les liens sur la même ligne */
+.actions-row {
+    display: flex;
+    gap: 1rem; 
+    flex-wrap: wrap; 
+    justify-content: space-evenly;
+}
+
+/* Liens action */
+.action-link {
+    display: 1;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    text-align: center;
+    color: #444;
+    background-color:#eddcc3;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.action-link:hover {
+    background-color: #bbb; 
+    color: #222;
+}

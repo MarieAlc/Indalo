@@ -1,24 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}congélation{% endblock %}
+{% block title %}Congélation{% endblock %}
 
 {% block body %}
-<h1>Vos congélation</h1>
-<div>
-    <h2>Bienvenue sur la page de gestion des congélations</h2>
-    <p>Vous pouvez ajouter et voir vos données de congélations.</p>
-<div>
-    <div>
-        <a href="{{ path('app_congelation_liste') }}">
-            <h2>Voir l'historique de vos congélation</h2>
-        </a>
-    </div>
+  <section class="section">
+    <h1 class="para">🧊 Gestion de la congélation</h1>
+    <p class="para">Bienvenue sur votre tableau de bord pour gérer les congélations. Vous pouvez consulter ou ajouter des produits congelés.</p>
 
-    <div>
-        <a href="{{ path('app_congelation_ajouter') }}">
-            <h2>Ajouter un nouveau produit congelé</h2>
-        </a>
-    </div>
-</div>
+    <div class="features">
+      <a href="{{ path('app_congelation_liste') }}" class="feature-card">
+        <h3>📜 Historique des congélations</h3>
+        <p>Voir toutes les congélations enregistrées</p>
+      </a>
 
+      <a href="{{ path('app_congelation_ajouter') }}" class="feature-card">
+        <h3>➕ Ajouter un produit</h3>
+        <p>Enregistrer une nouvelle congélation</p>
+      </a>
+    </div>
+  </section>
 {% endblock %}

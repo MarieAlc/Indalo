@@ -3,42 +3,36 @@
 {% block title %}Valider les tâches de nettoyage{% endblock %}
 
 {% block body %}
-<h1>Valider les tâches de nettoyage</h1>
+<section class="section">
+    <h1>Valider les tâches de nettoyage</h1>
 
-<form action="{{ path('app_nettoyage_valider_traiter') }}" method="POST">
-    {% if nonValides is not empty %}
-        <ul>
-            {% for item in nonValides %}
-                <li>
-                    <label>
-                        <input type="checkbox" name="plan_ids[]" value="{{ item.plan.id }}">
-                        {{ item.plan.nom }}
-                        {% if item.dateProchaineValidation %}
-                            (à valider depuis le {{ item.dateProchaineValidation|date('d/m/Y') }})
-                        {% else %}
-                            (Jamais validée)
-                        {% endif %}
-                    </label>
-                </li>
-            {% endfor %}
-        </ul>
-        <button type="submit">Valider les tâches sélectionnées</button>
-    {% else %}
-        <p>Aucune tâche à valider aujourd'hui.</p>
-    {% endif %}
-</form>
+    <form action="{{ path('app_nettoyage_valider_traiter') }}" method="POST" class="form nettoyage-validation-form">
+        {% if nonValides is not empty %}
+            <ul class="form-list nettoyage-list">
+                {% for item in nonValides %}
+                    <li class="form-list-item nettoyage-item">
+                        <label class="nettoyage-label">
+                            <div class="nettoyage-label-top">
+                                <span class="nettoyage-task-name">{{ item.plan.nom }}</span>
+                                <input type="checkbox" name="plan_ids[]" value="{{ item.plan.id }}" class="nettoyage-checkbox">
+                            </div>
+                            <small class="nettoyage-hint">
+                                {% if item.dateProchaineValidation %}
+                                    (à valider depuis le {{ item.dateProchaineValidation|date('d/m/Y') }})
+                                {% else %}
+                                    (Jamais validée)
+                                {% endif %}
+                            </small>
+                        </label>
+                    </li>
+                {% endfor %}
+            </ul>
+            <button type="submit" class="btn btn-primary nettoyage-submit">Valider les tâches sélectionnées</button>
+        {% else %}
+            <p>Aucune tâche à valider aujourd'hui.</p>
+        {% endif %}
+    </form>
 
-{% for message in app.flashes('success') %}
-    <div class="alert alert-success">{{ message }}</div>
-{% endfor %}
-{% for message in app.flashes('info') %}
-    <div class="alert alert-info">{{ message }}</div>
-{% endfor %}
-{% for message in app.flashes('warning') %}
-    <div class="alert alert-warning">{{ message }}</div>
-{% endfor %}
-{% for message in app.flashes('danger') %}
-    <div class="alert alert-danger">{{ message }}</div>
-{% endfor %}
-<a href="{{ path('app_nettoyage') }}">← Retour au suivi</a>
+    <a href="{{ path('app_nettoyage') }}">← Retour au suivi</a>
+</section>
 {% endblock %}

@@ -4,13 +4,14 @@
 
 {% block body %}
 <section class="section">
-
-{{form_start(form)}}
-
-{{ form_end(form) }}
-
+    <div class="form">
+        <h1>Ajouter une nouvelle température</h1>
+        
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
 </section>
-
 
 <a href="{{ path('app_temperature') }}">← Retour au suivi</a>
 

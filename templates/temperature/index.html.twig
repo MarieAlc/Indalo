@@ -3,22 +3,20 @@
 {% block title %}Températures{% endblock %}
 
 {% block body %}
-<h1>Températures</h1>
-<div>
-    <p>Bienvenue dans la section de gestion des températures. Ici, vous pouvez suivre et gérer les températures de vos produits.</p>
-</div>
-<div>
-    <div>
-        <a href="{{ path('app_temperature_liste') }}">
-            <h2>Voir l'historique des températures</h2>
-        </a>
-    </div>
+<section class="section">
+  <h1 class="para">🌡️ Températures</h1>
+  <p class="para">Bienvenue dans la section de gestion des températures. Ici, vous pouvez suivre et gérer les relevés de vos produits.</p>
 
-    <div>
-        <a href="{{ path('app_temperature_ajouter') }}">
-            <h2>Ajouter une nouvelle température</h2>
-        </a>
-    </div>
-</div>
-    
+  <div class="features">
+    <a href="{{ path('app_temperature_liste') }}" class="feature-card">
+      <h3>📈 Historique des températures</h3>
+      <p>Consulter tous les relevés enregistrés</p>
+    </a>
+
+    <a href="{{ path('app_temperature_ajouter') }}" class="feature-card">
+      <h3>➕ Ajouter un relevé</h3>
+      <p>Enregistrer une nouvelle température</p>
+    </a>
+  </div>
+</section>
 {% endblock %}
