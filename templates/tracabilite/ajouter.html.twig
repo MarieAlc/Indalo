@@ -3,8 +3,11 @@
 {% block title %}Traçabilité{% endblock %}
 
 {% block body %}
+<section class="section">
 
-<h2>Ajouter une nouvelle traçabilité</h2>
+    <h1>Traçabilité</h1>
+
+    <p>Cette page vous permet d'ajouter une nouvelle traçabilité.</p>
 
     <div>
         {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
@@ -13,6 +16,8 @@
            
         {{ form_end(form) }}
     </div>
+
+</section>
 
 
 

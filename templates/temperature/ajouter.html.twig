@@ -3,10 +3,13 @@
 {% block title %}Nouvelle température{% endblock %}
 
 {% block body %}
+<section class="section">
 
 {{form_start(form)}}
 
 {{ form_end(form) }}
+
+</section>
 
 
 <a href="{{ path('app_temperature') }}">← Retour au suivi</a>

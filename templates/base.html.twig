@@ -13,30 +13,27 @@
     </head>
     <body>    
         <nav class="navbar">
-            <div>
-                <a href="{{path('app_home')}}" class="navbar-brand">
-                INDALO
-                </a>
+            <div class="navbar-container">
+                <a href="{{ path('app_home') }}" class="navbar-brand">INDALO</a>
 
-                <button class="burger" aria-label="Menu">
+                <button class="burger" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('active')">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
-                
 
                 <div class="nav-links">
                     <ul class="navbar-nav">
-                        <li><a class="nav-link" href="{{path('app_home')}}">Accueil</a></li>
-                        {% if not app.user %}    
-                        <li><a class="nav-link" href="{{path('app_login')}}">Connexion</a></li>
+                        <li><a class="nav-link" href="{{ path('app_home') }}">Accueil</a></li>
+                        {% if not app.user %}
+                            <li><a class="nav-link" href="{{ path('app_login') }}">Connexion</a></li>
                         {% else %}
-                        <li><a class="nav-link" href="#">Profil</a></li>
-                        <li><a class="nav-link" href="{{path('app_congelation')}}">Congélation</a></li>
-                        <li><a class="nav-link" href="{{path('app_nettoyage')}}">Nettoyage</a></li>
-                        <li><a class="nav-link" href="{{path('app_temperature')}}">Tempéraure</a></li>
-                        <li><a class="nav-link" href="{{path('app_tracabilite')}}">Traçabilité</a></li>
-                        <li><a class="nav-link" href="{{path('app_logout')}}">Déconnexion</a></li>
+                            <li><a class="nav-link" href="{{path('app_profil')}}">Profil</a></li>
+                            <li><a class="nav-link" href="{{ path('app_congelation') }}">Congélation</a></li>
+                            <li><a class="nav-link" href="{{ path('app_nettoyage') }}">Nettoyage</a></li>
+                            <li><a class="nav-link" href="{{ path('app_temperature') }}">Température</a></li>
+                            <li><a class="nav-link" href="{{ path('app_tracabilite') }}">Traçabilité</a></li>
+                            <li><a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a></li>
                         {% endif %}
                     </ul>
                 </div>
@@ -47,26 +44,25 @@
          {% block body %}
          {% endblock %}
         <footer class="footer">
-        <div>
-            <div>
-                <p>Gestion restaurant Indalo</p>                
-            </div>
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <h3>INDALO</h3>
+                    <p>Votre outil de gestion au quotidien.</p>
+                </div>
 
-            <div>
-                <p>Liens utiles</p>
-                <ul>
-                    <li><a href="{{path('app_home')}}">Accueil</a></li>
-                    {% if not app.user %}
-                    <li><a href="{{path('app_login')}}">Connexion</a></li>
-                     {% else %}
-                    <li><a class="nav-link" href="#">Profil</a></li>
-                    <li><a class="nav-link" href="{{path('app_logout')}}">Déconnexion</a></li>
-                    {% endif %}
-                </ul>
+                <div class="footer-links">
+                    <h4>Liens utiles</h4>
+                    <ul>
+                        <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                        {% if not app.user %}
+                            <li><a href="{{ path('app_login') }}">Connexion</a></li>
+                        {% else %}
+                            <li><a href="{{path('app_profil')}}">Profil</a></li>
+                            <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-
-            
-        </div>
         </footer>
         {% block javascripts %}{{ encore_entry_script_tags('app') }} {% endblock %}
             {{ encore_entry_script_tags('app') }}

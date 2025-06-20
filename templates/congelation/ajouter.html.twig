@@ -3,11 +3,13 @@
 {% block title %}Nouvelle congélation{% endblock %}
 
 {% block body %}
-
+<section class="section">
+    <h1>Ajouter une nouvelle congélation</h1>
 {{form_start(form)}}
 
 {{ form_end(form) }}
 
+</section>
 
 <a href="{{ path('app_congelation') }}">← Retour au suivi</a>
 

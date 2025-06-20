@@ -3,63 +3,96 @@
 {% block title %}Bienvenue{% endblock %}
 
 {% block body %}
+{% if not app.user %}
+    <section class="section">
 
+        <div class="para">
+            <h1>Bienvenue sur votre outil de gestion</h1>
 
-<div>
-    <h1>Bienvenue sur votre outils de gestion</h1>
-
-    <p>Ce site vous permet de suivre la température de vos produits, de gérer la traçabilité et bien plus encore.</p>
-    <p>Pour commencer, veuillez vous connecter.</p>
-</div>
-
-{% if app.user %} 
-<div>
-    <h1>Tableau de bord</h1>
-
-    <h2>Tâches non validées</h2>
-    {% if tachesNonValidees is empty %}
-        <p>Aucune tâche non validée.</p>
-    {% else %}
-        <ul>
-            {% for tache in tachesNonValidees %}
-                <li>{{ tache.nom }} - {{ tache.date|date('d/m/Y') }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-</div> 
-
-        <h2>Catégories</h2>
-        <div style="display: flex; gap: 1rem;">
-            <div style="background: #f0f0f0; padding: 1rem; border-radius: 8px;">
-                <a href="{{path('app_temperature')}}">
-                    <strong>Températures</strong>
-                    <p>Contôle des températures des frigo</p>
-                </a>
-            </div>
-
-            <div style="background: #f0f0f0; padding: 1rem; border-radius: 8px;">
-                <a href="#">
-                    <strong>Congélation</strong>
-                    <p>Entrez vos date de congélation</p>
-                </a>
-            </div>
-
-            <div style="background: #f0f0f0; padding: 1rem; border-radius: 8px;">
-                <a href="#">
-                    <strong>Nettoyage</strong>
-                    <p>Suivis entretiens de la cuisine</p>
-                </a>
-            </div>
-
-            <div style="background: #f0f0f0; padding: 1rem; border-radius: 8px;">
-                <a href="#">
-                    <strong>Traçabilités</strong>
-                    <p>Suivre vos produits</p>
-                </a>
-            </div>
-           
+            <p>Ce site vous permet de suivre la température de vos produits, de gérer la traçabilité et bien plus encore.</p>
+            <p>Pour commencer, veuillez vous connecter.</p>
         </div>
+
+        <div class="para">
+            <a href="{{ path('app_login') }}"><h2>Connectez-vous</h2></a>
+            <p>Si vous n'avez pas de compte, veuillez contacter l'administrateur.</p>
+        </div>
+    </section>
+
+
+    <section class="section">
+    <h2>Fonctionnalités</h2>
+    <div class="features">
+        <div class="feature-card">
+            <h3>Suivi des températures</h3>
+            <p>Gérez les relevés de températures en cuisine ou en chambre froide.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Traçabilité des produits</h3>
+            <p>Historique des entrées et sorties produits pour une sécurité optimale.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Suivi des nettoyages</h3>
+            <p>Consignez toutes vos actions de nettoyage pour garantir l’hygiène.</p>
+        </div>
+    </div>
+    </section>
 {% endif %}
 
+{% if app.user %}
+<div class="para">
+    <h2>Bienvenue, {{ app.user.prenom }} !</h2>
+</div>
+
+<section class="section"> 
+    <div>
+        <h1>Tableau de bord</h1>
+
+        <h2>Tâches non validées</h2>
+        {% if tachesNonValidees is empty %}
+            <p>Aucune tâche non validée.</p>
+        {% else %}
+            <ul>
+                {% for tache in tachesNonValidees %}
+                    <li>{{ tache.nom }} - {{ tache.date|date('d/m/Y') }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</section>
+
+<section class="section"> 
+    <div style="features">
+        <h2>Catégories</h2>
+        <div class="feature-card">
+            <a href="{{ path('app_temperature') }}">
+                <strong>Températures</strong>
+                <p>Contrôle des températures des frigos</p>
+            </a>
+        </div>
+
+        <div class="feature-card">
+            <a href="{{ path('app_congelation') }}">
+                <strong>Congélation</strong>
+                <p>Entrez vos dates de congélation</p>
+            </a>
+        </div>
+
+        <div class="feature-card">
+            <a href="{{ path('app_nettoyage') }}">
+                <strong>Nettoyage</strong>
+                <p>Suivi des entretiens de la cuisine</p>
+            </a>
+        </div>
+
+        <div class="feature-card">
+            <a href="{{ path('app_tracabilite') }}">
+                <strong>Traçabilités</strong>
+                <p>Suivez vos produits</p>
+            </a>
+        </div>
+    </div>    
+</section>
+{% endif %}
 
 {% endblock %}

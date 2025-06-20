@@ -3,17 +3,21 @@
 {% block title %}Modifier mes infos{% endblock %}
 
 {% block body %}
-    <h1>Modifier mes informations</h1>
+<section class="section">
+    <div class="form">
+        <h1>Modifier mes informations</h1>
 
-    {{ form_start(form) }}
-        {{ form_row(form.nom) }}
-        {{ form_row(form.prenom) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.qualification) }}
-        
+        {{ form_start(form) }}
+            {{ form_row(form.nom) }}
+            {{ form_row(form.prenom) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.qualification) }}
+            
 
-        <button class="btn btn-primary">Enregistrer</button>
-    {{ form_end(form) }}
+            <button class="btn btn-primary">Enregistrer</button>
+        {{ form_end(form) }}
+    </div>
 
+</section>
     <a href="{{ path('app_profil') }}">← Retour au profil</a>
 {% endblock %}
