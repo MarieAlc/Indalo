@@ -43,26 +43,30 @@
     </div>
 
     <section class="section">
-        <h2>⚠️ Tâches non validées</h2>
+        <div class="block-validation">
+            <h2 class="section-subtitle">⚠️ Tâches non validées</h2>
 
-        {% if nonValides is not empty %}
-            <ul>
-                {% for item in nonValides %}
-                    {% set plan = item.plan %}
-                    {% set dateDerniereValidation = item.dateDerniereValidation %}
-                    <li style="color: red;">
-                        ⚠️ <strong>{{ plan.nom }}</strong> n’a pas été validée.
-                        {% if dateDerniereValidation %}
-                            Dernière validation le {{ dateDerniereValidation|date('d/m/Y') }}
-                        {% else %}
-                            Pas de validation enregistrée
-                        {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>✅ Aucune alerte de nettoyage !</p>
-        {% endif %}
+            {% if nonValides is not empty %}
+                <ul class="task-list task-list-alert">
+                    {% for item in nonValides %}
+                        {% set plan = item.plan %}
+                        {% set dateDerniereValidation = item.dateDerniereValidation %}
+                        <li>
+                            ⚠️ <strong>{{ plan.nom }}</strong><br>
+                            <small>
+                                {% if dateDerniereValidation %}
+                                    Dernière validation le {{ dateDerniereValidation|date('d/m/Y') }}
+                                {% else %}
+                                    Pas de validation enregistrée
+                                {% endif %}
+                            </small>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="temper">✅ Aucune alerte de nettoyage !</p>
+            {% endif %}
+        </div>
     </section>
 
     <section class="section">

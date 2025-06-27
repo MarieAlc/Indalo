@@ -4,22 +4,41 @@
 
 {% block body %}
 <section class="section">
-    <h1 class="section-title">👤 Mon profil</h1>
+  <h1 class="section-title">👤 Mon profil</h1>
 
-    <div class="profil-info">
-        <p><span class="icon-label">🪪 Nom :</span> {{ app.user.nom }}</p>
-        <p><span class="icon-label">🧍‍♀️ Prénom :</span> {{ app.user.prenom }}</p>
-        <p><span class="icon-label">📧 Email :</span> {{ app.user.email }}</p>
-        <p><span class="icon-label">🎓 Qualification :</span> {{ app.user.qualification }}</p>
-    </div>
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Champ</th>
+        <th>Valeur</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>🪪 Nom</td>
+        <td>{{ app.user.nom }}</td>
+      </tr>
+      <tr>
+        <td>🧍‍♀️ Prénom</td>
+        <td>{{ app.user.prenom }}</td>
+      </tr>
+      <tr>
+        <td>📧 Email</td>
+        <td>{{ app.user.email }}</td>
+      </tr>
+      <tr>
+        <td>🎓 Qualification</td>
+        <td>{{ app.user.qualification }}</td>
+      </tr>
+    </tbody>
+  </table>
 </section>
 
-
 <section class="section profil-actions">
-    <h2 class="section-subtitle">⚙️ Actions</h2>
-    <div class="actions-row">
-        <a href="{{ path('app_profil_modifier') }}" class="action-link">✏️ Modifier mes informations</a>
-        <a href="{{ path('app_profil_password') }}" class="action-link">🔒 Modifier mon mot de passe</a>
-    </div>
+  <h2 class="section-subtitle">⚙️ Actions</h2>
+  <div class="actions-row">
+    <a href="{{ path('app_profil_modifier') }}" class="action-link">✏️ Modifier mes informations</a>
+    <a href="{{ path('app_profil_password') }}" class="action-link">🔒 Modifier mon mot de passe</a>
+  </div>
 </section>
 {% endblock %}

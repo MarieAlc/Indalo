@@ -57,7 +57,7 @@ final class NettoyageController extends AbstractController
         $dernieresValidations = $entityManager->getRepository(NettoyageEffectue::class)
             ->createQueryBuilder('n')
             ->orderBy('n.date', 'DESC')
-            ->setMaxResults(5)
+            ->setMaxResults(3)
             ->getQuery()
             ->getResult();
 

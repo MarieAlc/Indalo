@@ -3,39 +3,43 @@
 {% block title %}Historique des tâches{% endblock %}
 
 {% block body %}
-<h1>🧾 Historique des tâches de nettoyage</h1>
+<section class="section">
+  <h1>🧾 Historique des tâches de nettoyage</h1>
 
-{% if taches is not empty %}
-  {% set grouped = {} %}
-  {% for item in taches %}
-    {% set date = item.date ? item.date.format('d/m/Y') : 'Date inconnue' %}
-    {% set grouped = grouped|merge({ (date): (grouped[date] ?? [])|merge([item]) }) %}
-  {% endfor %}
+  {% if taches is not empty %}
+    {% set grouped = {} %}
+    {% for item in taches %}
+      {% set date = item.date ? item.date.format('d/m/Y') : 'Date inconnue' %}
+      {% set grouped = grouped|merge({ (date): (grouped[date] ?? [])|merge([item]) }) %}
+    {% endfor %}
 
-  {% for date, items in grouped %}
-    <h3>{{ date }}</h3>
-    <table class="table-historique">
-      <thead>
-        <tr>
-          <th>Nom de la tâche</th>
-          <th>Récurrence</th>
-          <th>Statut</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for item in items %}
+    {% for date, items in grouped %}
+      <h3>{{ date }}</h3>
+      <table class="styled-table">
+        <thead>
           <tr>
-            <td>{{ item.planNettoyage.nom }}</td>
-            <td>{{ item.planNettoyage.reccurence ? item.planNettoyage.reccurence.label : 'Non définie' }}</td>
-            <td>✅ Validée par {{ item.utilisateur.nom }}</td>
+            <th>Nom de la tâche</th>
+            <th>Récurrence</th>
+            <th>Statut</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  {% endfor %}
-{% else %}
-  <p>Aucune tâche trouvée dans l'historique.</p>
-{% endif %}
+        </thead>
+        <tbody>
+          {% for item in items %}
+            <tr>
+              <td>{{ item.planNettoyage.nom }}</td>
+              <td>{{ item.planNettoyage.reccurence ? item.planNettoyage.reccurence.label : 'Non définie' }}</td>
+              <td>✅ Validée par {{ item.utilisateur.nom }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endfor %}
+  {% else %}
+    <p class="para">Aucune tâche trouvée dans l'historique.</p>
+  {% endif %}
 
-<a href="{{ path('app_nettoyage') }}">← Retour au suivi</a>
+  <div class="actions-row" style="margin-top: 2rem;">
+    <a href="{{ path('app_nettoyage') }}" class="btn-link">← Retour au suivi</a>
+  </div>
+</section>
 {% endblock %}

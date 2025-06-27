@@ -1,4 +1,4 @@
-import './bootstrap.js';
+//import './bootstrap.js';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -6,11 +6,11 @@ import './bootstrap.js';
  * which should already be in your base.html.twig.
  */
 import './styles/app.css';
-console.log('Hello world');
 
 document.addEventListener('DOMContentLoaded', () => {
-  const burger = document.querySelector('.burger');
-  const navLinks = document.querySelector('.nav-links');
+  const burger = document.querySelector('.navbar-burger');
+  const navLinks = document.querySelector('.navbar-menu');
+
 
   if (burger && navLinks) {
     burger.addEventListener('click', () => {
@@ -18,3 +18,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+

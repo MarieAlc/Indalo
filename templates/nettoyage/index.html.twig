@@ -3,58 +3,63 @@
 {% block title %}Suivi du nettoyage{% endblock %}
 
 {% block body %}
-  <section class="section">
-    <h1 class="para">🧽 Suivi du nettoyage</h1>
-    <p class="para">Visualisez vos tâches validées et celles à faire, et gérez facilement le nettoyage quotidien.</p>
+<section class="section">
+  <h1 class="section-title">🧽 Suivi du nettoyage</h1>
+  <p class="para">Visualisez vos tâches validées et celles à faire, et gérez facilement le nettoyage quotidien.</p>
 
-    {# ✅ Tâches validées récemment #}
-    <div style="margin-bottom: 2rem;">
-      <h2 class="dashboard h2">✅ Dernières tâches validées</h2>
-      {% if validations is not empty %}
-        <ul>
-          {% for validation in validations %}
-            <li>✅ <strong>{{ validation.planNettoyage.nom }}</strong> – validée le {{ validation.date|date('d/m/Y') }}</li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p class="temper">Aucune tâche récemment validée.</p>
-      {% endif %}
-    </div>
+  {# ✅ Tâches validées récemment #}
+  <div class="block-validation">
+    <h2 class="section-subtitle">✅ Dernières tâches validées</h2>
+    {% if validations is not empty %}
+      <ul class="task-list task-list-valid">
+        {% for validation in validations %}
+          <li>
+            ✅ <strong>{{ validation.planNettoyage.nom }}</strong><br>
+            <small>Validée le {{ validation.date|date('d/m/Y') }}</small>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="temper">Aucune tâche récemment validée.</p>
+    {% endif %}
+  </div>
 
-    {# ⚠️ Tâches non validées #}
-    <div style="margin-bottom: 2rem;">
-      <h2 class="dashboard h2">⚠️ Tâches non validées</h2>
-      {% if nonValides is not empty %}
-        <ul>
-          {% for item in nonValides %}
-            {% set plan = item.plan %}
-            {% set dateDerniereValidation = item.dateDerniereValidation %}
-            <li style="color: red;">
-              ⚠️ <strong>{{ plan.nom }}</strong> n’a pas été validée.
+  {# ⚠️ Tâches non validées #}
+  <div class="block-alert">
+    <h2 class="section-subtitle">⚠️ Tâches non validées</h2>
+    {% if nonValides is not empty %}
+      <ul class="task-list task-list-alert">
+        {% for item in nonValides %}
+          {% set plan = item.plan %}
+          {% set dateDerniereValidation = item.dateDerniereValidation %}
+          <li>
+            ⚠️ <strong>{{ plan.nom }}</strong><br>
+            <small>
               {% if dateDerniereValidation %}
                 Dernière validation le {{ dateDerniereValidation|date('d/m/Y') }}
               {% else %}
                 Pas de validation enregistrée
               {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p class="temper">Aucune alerte de nettoyage !</p>
-      {% endif %}
-    </div>
+            </small>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="temper">Aucune alerte de nettoyage !</p>
+    {% endif %}
+  </div>
 
-    {# Liens vers les actions #}
-    <div class="features">
-      <a href="{{ path('app_nettoyage_liste') }}" class="feature-card">
-        <h3>📋 Historique complet</h3>
-        <p>Voir toutes les validations passées</p>
-      </a>
+  {# Liens vers les actions #}
+  <div class="features">
+    <a href="{{ path('app_nettoyage_liste') }}" class="feature-card">
+      <h3>📋 Historique complet</h3>
+      <p>Voir toutes les validations passées</p>
+    </a>
 
-      <a href="{{ path('app_nettoyage_valider') }}" class="feature-card">
-        <h3>✔️ Valider les tâches</h3>
-        <p>Valider les tâches de nettoyage du jour</p>
-      </a>
-    </div>
-  </section>
+    <a href="{{ path('app_nettoyage_valider') }}" class="feature-card">
+      <h3>✔️ Valider les tâches</h3>
+      <p>Valider les tâches de nettoyage du jour</p>
+    </a>
+  </div>
+</section>
 {% endblock %}

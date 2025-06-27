@@ -3,46 +3,44 @@
 {% block title %}Historique des congélations{% endblock %}
 
 {% block body %}
+<section class="section">
+  <h1>❄️ Historique des congélations</h1>
 
-<h1>Historique des congélations</h1>
-
-<div>
+  <div class="section-intro">
     <h2>Bienvenue sur la page de gestion des congélations</h2>
     <p>Vous pouvez voir l'historique de vos données de congélations.</p>
-</div>
+  </div>
 
-{% if congelations is not empty %}
-    {# On regroupe les congélations par date #}
+  {% if congelations is not empty %}
     {% set grouped = {} %}
     {% for item in congelations %}
-        {# Format date ou "Date inconnue" si null #}
-        {% set date = item.date ? item.date|date('d/m/Y') : 'Date inconnue' %}
-        {% set grouped = grouped|merge({ (date): (grouped[date] ?? [])|merge([item]) }) %}
+      {% set date = item.date ? item.date|date('d/m/Y') : 'Date inconnue' %}
+      {% set grouped = grouped|merge({ (date): (grouped[date] ?? [])|merge([item]) }) %}
     {% endfor %}
 
-    {# Boucle sur chaque date groupée #}
     {% for date, items in grouped %}
-        <h3>{{ date }}</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Produit</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in items %}
-                    <tr>
-                        <td>{{ item.produit }}</td>
-                        
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+      <h3>{{ date }}</h3>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Produit</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+            <tr>
+              <td>{{ item.produit }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     {% endfor %}
-{% else %}
-    <p>Aucune congélation enregistrée.</p>
-{% endif %}
+  {% else %}
+    <p class="para">Aucune congélation enregistrée.</p>
+  {% endif %}
 
-<a href="{{ path('app_congelation') }}">← Retour au suivi</a>
-
+  <div class="actions-row" style="margin-top: 2rem;">
+    <a href="{{ path('app_congelation') }}" class="btn-link">← Retour au suivi</a>
+  </div>
+</section>
 {% endblock %}

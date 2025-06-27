@@ -15,7 +15,6 @@
                             <div class="nettoyage-label-top">
                                 <span class="nettoyage-task-name">{{ item.plan.nom }}</span>
                                 <input type="checkbox" name="plan_ids[]" value="{{ item.plan.id }}" class="nettoyage-checkbox">
-                            </div>
                             <small class="nettoyage-hint">
                                 {% if item.dateProchaineValidation %}
                                     (à valider depuis le {{ item.dateProchaineValidation|date('d/m/Y') }})
@@ -23,6 +22,7 @@
                                     (Jamais validée)
                                 {% endif %}
                             </small>
+                            </div>
                         </label>
                     </li>
                 {% endfor %}
