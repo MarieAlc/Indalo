@@ -14,31 +14,30 @@ use Symfony\Component\Routing\Attribute\Route;
 final class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(PlanNettoyageRepository $planNettoyageRepository, EntityManagerInterface $entityManager): Response
-    { 
-        $planNettoyageRepo = $entityManager->getRepository(PlanNettoyage::class);
-        $nettoyageEffectueRepo = $entityManager->getRepository(NettoyageEffectue::class);
-
-        $plans = $planNettoyageRepo->findAll();
+    public function index(PlanNettoyageRepository $planNettoyageRepository): Response
+    {
         $today = new \DateTimeImmutable();
         $nonValides = [];
 
-        foreach ($plans as $plan) {
-            $dernierNettoyage = $nettoyageEffectueRepo->findOneBy(
-                ['planNettoyage' => $plan],
-                ['date' => 'DESC']
-            );
+        $plans = $planNettoyageRepository->findPlansWithLastNettoyageAndReccurence();
+
+        foreach ($plans as $result) {
+            /** @var PlanNettoyage $plan */
+            $plan = $result[0];
+            $lastNettoyageDate = $result['lastNettoyageDate'] ?? null;
+
+            if ($lastNettoyageDate !== null && ! $lastNettoyageDate instanceof \DateTimeImmutable) {
+                $lastNettoyageDate = new \DateTimeImmutable($lastNettoyageDate);
+            }
 
             $interval = $plan->getReccurence()->getIntervalleJour();
 
-            if ($dernierNettoyage) {
-                $dateDerniereValidation = $dernierNettoyage->getDate();
-                $dateProchaineValidation = $dateDerniereValidation->modify("+{$interval} days");
-
+            if ($lastNettoyageDate) {
+                $dateProchaineValidation = $lastNettoyageDate->modify("+{$interval} days");
                 if ($today >= $dateProchaineValidation) {
                     $nonValides[] = [
                         'plan' => $plan,
-                        'dateDerniereValidation' => $dateDerniereValidation,
+                        'dateDerniereValidation' => $lastNettoyageDate,
                     ];
                 }
             } else {

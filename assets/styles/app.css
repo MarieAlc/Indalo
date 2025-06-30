@@ -341,19 +341,22 @@ section, main {
 }
 
 /* Pied de page en version mobile */
-@media (max-width: 600px) {
+@media (max-width: 799px) {
   .footer-container {
-    flex-direction: column;
+    flex-direction: column; /* passage en colonne */
+    align-items: flex-start; /* alignement à gauche */
+    gap: 15px; /* un peu d’espace vertical */
+  }
+  .footer-brand {
+    flex-basis: auto;
   }
 
   .footer-brand,
   .footer-links {
-    max-width: 100%;
-    margin-right: 0;
-    margin-bottom: 20px;
+    max-width: 100%; /* largeur pleine */
+    margin: 0;
   }
 }
-
 /* === PARAGRAPHES GÉNÉRAUX === */
 .para {
   text-align: center;

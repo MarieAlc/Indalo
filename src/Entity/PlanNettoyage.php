@@ -25,11 +25,11 @@ class PlanNettoyage
     /**
      * @var Collection<int, NettoyageEffectue>
      */
-    #[ORM\OneToMany(targetEntity: NettoyageEffectue::class, mappedBy: 'planNettoyage')]
+    #[ORM\OneToMany(targetEntity: NettoyageEffectue::class, mappedBy: 'planNettoyage', cascade: ["remove"])]
     private Collection $nettoyageEffectues;
 
     #[ORM\Column]
-    private ?bool $valide = null;
+    private ?bool $valide = false;
 
     public function __construct()
     {

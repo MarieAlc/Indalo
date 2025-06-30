@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Une erreur est survenue{% endblock %}
+
+{% block body %}
+  <section class="section">
+    <h1>😞 Oups, une erreur est survenue</h1>
+    <p>Désolé, une erreur est survenue lors du traitement de votre demande.</p>
+    <p>Merci de réessayer plus tard.</p>
+    <a href="{{ path('app_home') }}">Retour à l'accueil</a>
+  </section>
+{% endblock %}

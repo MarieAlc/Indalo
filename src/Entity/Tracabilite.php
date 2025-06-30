@@ -14,8 +14,6 @@ class Tracabilite
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $produit = null;
 
     #[ORM\Column(length: 255,  nullable: true)]
     private ?string $photo = null;
@@ -24,19 +22,19 @@ class Tracabilite
     private ?\DateTimeImmutable $date = null;
 
     #[ORM\ManyToOne(inversedBy: 'tracabilites')]
-    private ?DureeConsommation $duree = null;
+    private ?ProduitTracabilite $produit = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getProduit(): ?string
+    public function getProduit(): ?ProduitTracabilite
     {
         return $this->produit;
     }
 
-    public function setProduit(string $produit): static
+    public function setProduit(?ProduitTracabilite $produit): static
     {
         $this->produit = $produit;
 
@@ -67,17 +65,7 @@ class Tracabilite
         return $this;
     }
 
-    public function getDuree(): ?DureeConsommation
-    {
-        return $this->duree;
-    }
-
-    public function setDuree(?DureeConsommation $duree): static
-    {
-        $this->duree = $duree;
-
-        return $this;
-    }
+    
     public function __construct(){
         $this->date = new \DateTimeImmutable(); 
     }

@@ -17,11 +17,20 @@ class TracabiliteForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('produit')
+            ->add('produit', EntityType::class, [
+                'class' => \App\Entity\ProduitTracabilite::class,
+                'choice_label' => 'nom', // ou un autre champ pertinent si tu en ajoutes d'autres
+                'label' => 'Produit',
+                'placeholder' => 'Choisir un produit',
+            ])
             ->add('photo', FileType::class, [
                 'label' => 'Photo du produit (JPG, JPEG ou PNG uniquement)',
-                'mapped' => false, // car ce n'est pas une propriété de l'entité directement
+                'mapped' => false, 
                 'required' => false,
+                'attr' =>[
+                    'accept'=> 'image/*',
+                    'capture' =>'environment',
+                ],
                 'constraints' => [
                     new File([
                         'maxSize' => '2M',
@@ -34,14 +43,7 @@ class TracabiliteForm extends AbstractType
                     ])
                 ],
             ])
-            ->add('duree', EntityType::class, [
-                'label' => 'Durée de consommation',
-                'class' => DureeConsommation::class,
-                'choice_label' => function($duree) {
-                    return $duree->getDuree() . ' H';
-                },
-                
-            ])
+    
             ->add('Submit', SubmitType::class,[
                 'label' => 'Ajouter',
             ])

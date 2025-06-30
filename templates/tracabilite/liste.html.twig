@@ -20,7 +20,6 @@
       <thead>
         <tr>
           <th>Produit</th>
-          <th>Durée</th>
           <th>Photo</th>
         </tr>
       </thead>
@@ -28,7 +27,6 @@
         {% for tracabilite in grouped[date] %}
           <tr>
             <td>{{ tracabilite.produit }}</td>
-            <td>{{ tracabilite.duree.duree }} Heures</td>
             <td>
               {% if tracabilite.photo %}
                 <img src="{{ asset('uploads/photos/' ~ tracabilite.photo) }}" alt="Photo produit" style="max-width: 180px; height: auto; border-radius: 6px;">

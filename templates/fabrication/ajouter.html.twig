@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle fabrication{% endblock %}
+
+{% block body %}
+<section class="section">
+    <div class="form">
+        <h1>Ajouter une nouvelle fabrication</h1>
+
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+</section>
+
+<a class="btn-link" href="{{ path('app_fabrication') }}">← Retour au suivi</a>
+{% endblock %}

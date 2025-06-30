@@ -2,52 +2,50 @@
 
 namespace App\Entity;
 
-use App\Repository\DureeConsommationRepository;
+use App\Repository\ProduitFabricationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: DureeConsommationRepository::class)]
-class DureeConsommation
+#[ORM\Entity(repositoryClass: ProduitFabricationRepository::class)]
+class ProduitFabrication
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 10)]
-    private ?string $duree = null;
-
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
 
     /**
      * @var Collection<int, Fabrication>
      */
-    #[ORM\OneToMany(targetEntity: Fabrication::class, mappedBy: 'DureeConsomation')]
+    #[ORM\OneToMany(targetEntity: Fabrication::class, mappedBy: 'produit')]
     private Collection $fabrications;
 
     public function __construct()
     {
-
         $this->fabrications = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDuree(): ?string
+    public function getNom(): ?string
     {
-        return $this->duree;
+        return $this->nom;
     }
 
-    public function setDuree(string $duree): static
+    public function setNom(string $nom): static
     {
-        $this->duree = $duree;
+        $this->nom = $nom;
 
         return $this;
     }
-
 
     /**
      * @return Collection<int, Fabrication>
@@ -61,7 +59,7 @@ class DureeConsommation
     {
         if (!$this->fabrications->contains($fabrication)) {
             $this->fabrications->add($fabrication);
-            $fabrication->setDureeConsomation($this);
+            $fabrication->setProduit($this);
         }
 
         return $this;
@@ -71,11 +69,13 @@ class DureeConsommation
     {
         if ($this->fabrications->removeElement($fabrication)) {
             // set the owning side to null (unless already changed)
-            if ($fabrication->getDureeConsomation() === $this) {
-                $fabrication->setDureeConsomation(null);
+            if ($fabrication->getProduit() === $this) {
+                $fabrication->setProduit(null);
             }
         }
 
         return $this;
     }
+
+   
 }

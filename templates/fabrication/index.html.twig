@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Traçabilité{% endblock %}
+
+{% block body %}
+<section class="section">
+  <h2>Produits arrivés à expiration</h2>
+
+  {% if expiredFabrications is empty %}
+    <p>Aucun produit n'est arrivé à expiration.</p>
+  {% else %}
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Date de fabrication</th>
+          <th>Produit</th>
+          <th>Durée de consommation (heures)</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for fab in expiredFabrications %}
+          <tr>
+            <td>{{ fab.date|date('d/m/Y H:i') }}</td>
+            <td>{{ fab.produit.nom }}</td>
+            <td>{{ fab.dureeConsomation.duree }} h</td>
+            <td>
+             <form method="post" action="{{ path('app_fabrication_masquer_expire', {'id': fab.id}) }}">
+              <input type="hidden" name="_token" value="{{ csrf_token('masquer' ~ fab.id) }}">
+              <button type="submit" class="btn-link">Masquer</button>
+            </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+</section>
+
+<section class="section">
+  <h1 class="section-title">🔍 Fabrication</h1>
+  <p  class="para">Gérez vos lots de production et suivez leur durée de vie.</p>
+
+  <div class="features">
+    <a href="{{ path('app_fabrication_liste') }}" class="feature-card">
+      <h3>📜 Historique des fabrications</h3>
+      <p>Consultez toutes les fabrications enregistrées.</p>
+    </a>
+
+    <a href="{{ path('app_fabrication_ajouter') }}" class="feature-card">
+      <h3>➕ Ajouter une fabrication</h3>
+      <p>Enregistrez un nouveau lot de production.</p>
+    </a>
+  </div>
+</section>
+{% endblock %}

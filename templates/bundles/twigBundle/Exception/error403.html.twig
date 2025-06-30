@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accès interdit (403){% endblock %}
+
+{% block body %}
+  <section class="section">
+    <h1>🚫 Accès interdit</h1>
+    <p>Vous n'avez pas la permission d'accéder à cette page.</p>
+    <a href="{{ path('app_home') }}">Retour à l'accueil</a>
+  </section>
+{% endblock %}
