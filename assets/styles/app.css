@@ -229,12 +229,33 @@ section, main {
   
 }
 @media screen and (max-width:440px) {
-  .section{
-    max-width: 320px !important;
-
+    .styled-table {
+    width: 100%; /* Prend toute la largeur disponible */
+    table-layout: fixed; /* Force un comportement responsive */
+    word-wrap: break-word; /* Les mots trop longs sont coupés */
   }
+
+  .styled-table th,
+  .styled-table td {
+    font-size: 14px; /* Réduis un peu la taille du texte si besoin */
+    padding: 6px 8px; /* Allège les paddings pour gagner de l'espace */
+  }
+}
+/* Style général (hors media query) */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 8px 12px;
+  text-align: left;
+  word-break: break-word; /* Pour couper les longs mots ou emails */
+  
   
 }
+
 
 .features {
   display: flex;
@@ -528,7 +549,7 @@ section, main {
   font-weight: 600;
   font-size: 1.1rem;
   color: #222;
-  white-space: nowrap;
+  word-break: break-word;
   flex-grow: 1;
 }
 
@@ -733,4 +754,24 @@ section, main {
 .task-list small {
   color: #555;
   font-size: 0.9rem;
+}
+/* === IMAGES DE TRACABILITE === */
+.tracabilite-photo {
+  width: 100%;
+  max-width:300px;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 0px auto; 
+}
+
+@media screen and (min-width: 800px) {
+  .tracabilite-photo {
+    max-width: 200px; /* Limite la taille sur écran large */
+  }
+}
+@media screen and (max-width: 500px) {
+  .tracabilite-photo {
+    max-width: 150px;
+  }
 }

@@ -68,6 +68,9 @@
                             <li><a href="{{path('app_profil')}}">Profil</a></li>
                             <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
                         {% endif %}
+                    {% if app.user and is_granted('ROLE_GERANT') %}
+                    <li><a href="{{ path('app_register') }}"> Inscrire du personnel </a></li>
+                    {% endif %}
                     </ul>
                 </div>
             </div>

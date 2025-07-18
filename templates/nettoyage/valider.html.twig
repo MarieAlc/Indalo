@@ -6,7 +6,7 @@
 <section class="section">
     <h1>Valider les tâches de nettoyage</h1>
 
-    <form action="{{ path('app_nettoyage_valider_traiter') }}" method="POST" class="form nettoyage-validation-form">
+    <form action="{{ path('app_nettoyage_valider_traiter') }}" method="POST" class="form nettoyage-validation-form" class="tracabilite-photo">
         {% if nonValides is not empty %}
             <ul class="form-list nettoyage-list">
                 {% for item in nonValides %}
@@ -15,13 +15,15 @@
                             <div class="nettoyage-label-top">
                                 <span class="nettoyage-task-name">{{ item.plan.nom }}</span>
                                 <input type="checkbox" name="plan_ids[]" value="{{ item.plan.id }}" class="nettoyage-checkbox">
-                            <small class="nettoyage-hint">
-                                {% if item.dateProchaineValidation %}
-                                    (à valider depuis le {{ item.dateProchaineValidation|date('d/m/Y') }})
-                                {% else %}
-                                    (Jamais validée)
-                                {% endif %}
-                            </small>
+                            </div>
+                            <div>
+                                <small class="nettoyage-hint">
+                                    {% if item.dateProchaineValidation %}
+                                        (à valider depuis le {{ item.dateProchaineValidation|date('d/m/Y') }})
+                                    {% else %}
+                                        (Jamais validée)
+                                    {% endif %}
+                                </small>
                             </div>
                         </label>
                     </li>
